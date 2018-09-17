@@ -8,14 +8,20 @@ router.get("/", function(req, res, next) {
 
 /* GET Userlist page. */
 router.get("/userlist", function(req, res) {
-  console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
   var db = req.db;
   var collection = db.get("usercollection");
-  collection.find({}, {}, function(e, docs) {
-    res.render("userlist", {
-      userlist: docs
+  console.log("COLLECTION");
+  collection
+    .find({})
+    .then(function(docs) {
+      console.log("THEN");
+      res.render("userlist", {
+        userlist: docs
+      });
+    })
+    .catch(function(e) {
+      console.log(e);
     });
-  });
 });
 
 /* GET New User page. */

@@ -5,7 +5,7 @@ var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 var mongo = require("mongodb");
 var monk = require("monk");
-var db = monk("localhost:27017/test");
+var dbConnection = monk("localhost:27017/test");
 
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
@@ -23,8 +23,10 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use(function(req, res, next) {
-  console.log("DB", db);
-  req.db = db;
+  dbConnection.then(db => {
+    console.log("ASDD");
+    req.db = db;
+  });
   next();
 });
 
