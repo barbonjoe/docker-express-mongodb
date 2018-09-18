@@ -1,16 +1,18 @@
-var createError = require("http-errors");
-var express = require("express");
-var path = require("path");
-var cookieParser = require("cookie-parser");
-var logger = require("morgan");
-var mongo = require("mongodb");
-var monk = require("monk");
-var dbConnection = monk("localhost:27017/test");
+const createError = require("http-errors");
+const express = require("express");
+const path = require("path");
+const cookieParser = require("cookie-parser");
+const logger = require("morgan");
+const mongo = require("mongodb");
+const MongoClient = require("mongodb").MongoClient;
 
-var indexRouter = require("./routes/index");
-var usersRouter = require("./routes/users");
+const indexRouter = require("./routes/index");
+const usersRouter = require("./routes/users");
 
-var app = express();
+const app = express();
+
+const username = "root";
+const password = "example";
 
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
@@ -23,11 +25,18 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use(function(req, res, next) {
-  dbConnection.then(db => {
-    console.log("ASDD");
-    req.db = db;
-  });
-  next();
+  MongoClient.connect(
+    `mongodb://${username}:${password}@localhost:27017`,
+    function(err, client) {
+      if (err) throw err;
+
+      const db = client.db("test");
+
+      req.db = db;
+      console.log("Connected correctly to server");
+      next();
+    }
+  );
 });
 
 app.use("/", indexRouter);

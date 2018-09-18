@@ -9,18 +9,14 @@ router.get("/", function(req, res, next) {
 /* GET Userlist page. */
 router.get("/userlist", function(req, res) {
   var db = req.db;
-  var collection = db.get("usercollection");
-  console.log("COLLECTION");
-  collection
+  db.collection("users")
     .find({})
-    .then(function(docs) {
-      console.log("THEN");
+    .toArray(function(err, result) {
+      if (err) throw err;
+
       res.render("userlist", {
-        userlist: docs
+        userlist: result
       });
-    })
-    .catch(function(e) {
-      console.log(e);
     });
 });
 
