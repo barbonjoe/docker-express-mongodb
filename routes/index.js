@@ -1,17 +1,18 @@
-var express = require("express");
-var router = express.Router();
+import express from "express";
+
+const router = express.Router();
 
 /* GET home page. */
-router.get("/", function(req, res, next) {
+router.get("/", (req, res) => {
   res.render("index", { title: "Express" });
 });
 
 /* GET Userlist page. */
-router.get("/userlist", function(req, res) {
-  var db = req.db;
+router.get("/userlist", (req, res) => {
+  const db = req.db;
   db.collection("users")
     .find({})
-    .toArray(function(err, result) {
+    .toArray((err, result) => {
       if (err) throw err;
 
       res.render("userlist", {
@@ -21,21 +22,21 @@ router.get("/userlist", function(req, res) {
 });
 
 /* GET New User page. */
-router.get("/newuser", function(req, res) {
+router.get("/newuser", (req, res) => {
   res.render("newuser", { title: "Add New User" });
 });
 
 /* POST to Add User Service */
-router.post("/adduser", function(req, res) {
-  // Set our internal DB variable
-  var db = req.db;
+router.post("/adduser", (req, res) => {
+  // Set our internal DB constiable
+  const db = req.db;
 
   // Get our form values. These rely on the "name" attributes
-  var userName = req.body.username;
-  var userEmail = req.body.useremail;
+  const userName = req.body.username;
+  const userEmail = req.body.useremail;
 
   // Set our collection
-  var collection = db.get("usercollection");
+  const collection = db.get("usercollection");
 
   // Submit to the DB
   collection.insert(
@@ -43,7 +44,7 @@ router.post("/adduser", function(req, res) {
       username: userName,
       email: userEmail
     },
-    function(err, doc) {
+    err => {
       if (err) {
         // If it failed, return error
         res.send("There was a problem adding the information to the database.");
@@ -57,4 +58,4 @@ router.post("/adduser", function(req, res) {
   );
 });
 
-module.exports = router;
+export default router;

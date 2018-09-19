@@ -1,18 +1,13 @@
-const createError = require("http-errors");
-const express = require("express");
-const path = require("path");
-const cookieParser = require("cookie-parser");
-const logger = require("morgan");
-const mongo = require("mongodb");
-const MongoClient = require("mongodb").MongoClient;
+import createError from "http-errors";
+import express from "express";
+import path from "path";
+import cookieParser from "cookie-parser";
+import logger from "morgan";
 
-const indexRouter = require("./routes/index");
-const usersRouter = require("./routes/users");
+import indexRouter from "./routes/index";
+import usersRouter from "./routes/users";
 
 const app = express();
-
-const username = "root";
-const password = "example";
 
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
@@ -24,31 +19,32 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
-app.use(function(req, res, next) {
-  MongoClient.connect(
-    `mongodb://${username}:${password}@localhost:27017`,
-    function(err, client) {
-      if (err) throw err;
+// app.use(function(req, res, next) {
+//   MongoClient.connect(
+//     "mongodb://localhost:27017",
+//     { useNewUrlParser: true },
+//     function(err, client) {
+//       if (err) throw err;
 
-      const db = client.db("test");
+//       const db = client.db("test");
 
-      req.db = db;
-      console.log("Connected correctly to server");
-      next();
-    }
-  );
-});
+//       req.db = db;
+//       console.log("Connected correctly to server");
+//       next();
+//     }
+//   );
+// });
 
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
+app.use((req, res, next) => {
   next(createError(404));
 });
 
 // error handler
-app.use(function(err, req, res, next) {
+app.use((err, req, res) => {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get("env") === "development" ? err : {};
@@ -58,4 +54,4 @@ app.use(function(err, req, res, next) {
   res.render("error");
 });
 
-module.exports = app;
+export default app;
