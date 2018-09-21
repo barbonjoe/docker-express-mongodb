@@ -7,7 +7,6 @@ import helmet from "helmet";
 import { notFoundhandler, errorhandler } from "./lib/expressEvents";
 
 import indexRouter from "./routes/index";
-import usersRouter from "./routes/users";
 
 const app = express();
 
@@ -22,7 +21,6 @@ app.use(compress());
 app.use(helmet());
 
 app.use("/", indexRouter);
-app.use("/users", usersRouter);
 
 // catch 404 and forward to error handler
 app.use(notFoundhandler);
