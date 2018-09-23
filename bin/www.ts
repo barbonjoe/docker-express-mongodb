@@ -32,16 +32,23 @@ const server = http.createServer(app);
 /**
  * Listen on provided port, on all network interfaces.
  */
-connectAsync(dbUrl)
-  .then(() => {
-    server.listen(port, () => {
-      // tslint:disable-next-line:no-console
-      console.log("App started.");
-    });
-    server.on("error", handleError(port));
-    server.on("listening", handleListening(server));
-  })
-  .catch(e => {
-    // tslint:disable-next-line:no-console
-    console.error(e);
-  });
+// connectAsync(dbUrl)
+//   .then(() => {
+//     server.listen(port, () => {
+//       // tslint:disable-next-line:no-console
+//       console.log("App started.");
+//     });
+//     server.on("error", handleError(port));
+//     server.on("listening", handleListening(server));
+//   })
+//   .catch(e => {
+//     // tslint:disable-next-line:no-console
+//     console.error(e);
+//   });
+
+server.listen(port, () => {
+  // tslint:disable-next-line:no-console
+  console.log("App started.");
+});
+server.on("error", handleError(port));
+server.on("listening", handleListening(server));
