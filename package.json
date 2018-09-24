@@ -4,8 +4,7 @@
   "private": true,
   "scripts": {
     "build": "tsc",
-    "start-prod": "ts-node -r tsconfig-paths/register ./bin/www.ts",
-    "start": "nodemon"
+    "start": "docker-compose up -d --build && nodemon"
   },
   "dependencies": {
     "compression": "^1.7.3",
