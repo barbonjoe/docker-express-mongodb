@@ -4,10 +4,10 @@ import logger from "morgan";
 import compress from "compression";
 import helmet from "helmet";
 
-import { notFoundhandler, errorhandler } from "./lib/expressEvents";
+import { notFoundhandler, errorhandler } from "lib/expressEvents";
 
-import indexRouter from "./routes/index";
-import apiRouter from "./routes/api";
+import indexRouter from "routes/index";
+import apiRouter from "routes/api";
 
 const app = express();
 

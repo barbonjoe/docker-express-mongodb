@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "build": "tsc",
-    "start": "ts-node ./bin/www.ts"
+    "start-prod": "ts-node -r tsconfig-paths/register ./bin/www.ts",
+    "start": "nodemon"
   },
   "dependencies": {
     "compression": "^1.7.3",
@@ -26,7 +27,9 @@
     "@types/http-errors": "^1.6.1",
     "@types/mongodb": "^3.1.9",
     "@types/morgan": "^1.7.35",
+    "nodemon": "^1.18.4",
     "ts-node": "^7.0.1",
+    "tsconfig-paths": "^3.6.0",
     "tslint": "^5.11.0",
     "typescript": "^3.0.3"
   }

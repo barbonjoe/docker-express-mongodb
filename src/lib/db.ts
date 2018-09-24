@@ -3,7 +3,7 @@ import { MongoClient, Db } from "mongodb";
 let connection: MongoClient | null = null;
 let db: Db | null = null;
 
-export function connectAsync(url: string) {
+export function connectAsync(url: string): Promise<Db> {
   return new Promise((resolve, reject) => {
     if (db != null) {
       resolve(db);

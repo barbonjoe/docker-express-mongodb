@@ -29,14 +29,14 @@
     // "alwaysStrict": true,                  /* Parse in strict mode and emit "use strict" for each source file. */
 
     /* Additional Checks */
-    "noUnusedLocals": false /* Report errors on unused locals. */,
-    "noUnusedParameters": false /* Report errors on unused parameters. */,
+    "noUnusedLocals": true /* Report errors on unused locals. */,
+    "noUnusedParameters": true /* Report errors on unused parameters. */,
     "noImplicitReturns": true /* Report error when not all code paths in function return a value. */,
     "noFallthroughCasesInSwitch": true /* Report errors for fallthrough cases in switch statement. */,
 
     /* Module Resolution Options */
     "moduleResolution": "node" /* Specify module resolution strategy: 'node' (Node.js) or 'classic' (TypeScript pre-1.6). */,
-    "baseUrl": "." /* Base directory to resolve non-absolute module names. */,
+    "baseUrl": "./src" /* Base directory to resolve non-absolute module names. */,
     //"paths": {
     //"material-ui/*": ["node_modules/matrial-ui/index.d.ts"]
     //} /* A series of entries which re-map imports to lookup locations relative to the 'baseUrl'. */
@@ -62,8 +62,10 @@
     // "experimentalDecorators": true,        /* Enables experimental support for ES7 decorators. */
     // "emitDecoratorMetadata": true,         /* Enables experimental support for emitting type metadata for decorators. */
     "skipLibCheck": true,
-    "resolveJsonModule": true
+    "resolveJsonModule": true,
+    "paths": {
+      "src/*": ["./src/*"]
+    }
   },
-  "include": ["**/*"],
   "exclude": ["node_modules"]
 }
